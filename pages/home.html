@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>FFXIV Achievement Hunter</title>
+</head>
+
+<h1>My Achievements</h1>
+<table>
+	<thead>
+		<tr></tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+<!--<script type="module" src="..\logic\home.js"></script>-->
+<script>
+	const xhr = new XMLHttpRequest();
+	xhr.open("GET", "https://ffxivcollect.com/api/achievements");
+	xhr.send();
+	xhr.responseType = "json";
+	xhr.onload = () => {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			const achievements = xhr.response;
+			console.log(achievements);
+			populateTable(achievements);
+		} else {
+			console.log(`Error: ${xhr.status}`);
+		}
+	};
+
+	function populateTable(obj) {
+		const achievements = obj.results;
+		console.log(Object.keys(achievements[0]));
+		const makeCell = (content) => {
+			return `<td>${content}</td>`
+		}
+
+		const makeRow = (content) => {
+			return `<tr>${content}</tr>`
+		}
+
+		const table = document.querySelector('.table')
+		const colHeaders = Object.keys(achievements[0]).map(key => makeCell(key)).join('')
+		const bodyRows = achievements.map(row => {
+			return makeRow(Object.keys(row).map(col => makeCell(row[col])).join(''))
+		}).join('')
+
+
+		document.querySelector('thead tr').innerHTML = colHeaders
+		document.querySelector('tbody').innerHTML = bodyRows
+	}
+
+
+	/*function populateTable(obj) {
+		const section = document.querySelector('section');
+		const achievements = obj.results;
+
+		const myList = document.createElement("tr");
+
+		for (const achievement of achievements) {
+			const listItem = document.createElement("td");
+			listItem.textContent = achievement.name;
+			myList.appendChild(listItem);
+			const listItem2 = document.createElement("td");
+			listItem2.textContent = achievement.points;
+			myList.appendChild(listItem2);
+		}
+		table.appendChild(myList);
+		table.appendChild(document.createElement(table))
+	}*/
+</script>
+
+</html>
