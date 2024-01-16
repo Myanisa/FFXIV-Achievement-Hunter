@@ -1,0 +1,18 @@
+{
+    "id": 1,
+    "name": "To Crush Your Enemies I",
+    "description": "Defeat 100 enemies.",
+    "points": 5,
+    "order": 1,
+    "patch": "2.0",
+    "owned": "99%",
+    "icon": "https://ffxivcollect.com/images/achievements/2565.png",
+    "category": {
+        "id": 1,
+        "name": "Battle"
+    },
+    "type": {
+        "id": 1,
+        "name": "Battle"
+    }
+}
